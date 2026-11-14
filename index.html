@@ -2,14 +2,14 @@
 <html lang="uk">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Мій бюджет</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Бюджет">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f1ea" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14120f" media="(prefers-color-scheme: dark)">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
@@ -393,6 +393,121 @@ html,body{overflow-x:clip}
 .mt-s{display:flex;justify-content:space-between;flex-wrap:wrap;gap:2px 10px;font-size:12.5px;color:var(--muted);margin-top:5px}
 .mt-s.warn{color:var(--text)}
 body:not(.apple) .sheet .card.vzc{background:none;padding:0;margin-bottom:14px}
+/* ===================== Buchungsmaske: Betrag oben, darunter Zeilen in Karten; Kategorie-Auswahl als Liste ===================== */
+.txtop{text-align:center;margin:-4px 0 12px}
+.txtop .seg{max-width:360px;margin:0 auto}
+.txtop input.amtin{padding:4px 14px 12px;font-size:44px}
+.txl{margin-bottom:12px}
+body:not(.apple) .txl,body:not(.apple) #tPickL .list{background:var(--card2)}
+.txr{display:flex;align-items:flex-start;gap:12px;padding:9px 14px;position:relative}
+.txr[hidden]{display:none}
+.txr ~ .txr::before{content:"";position:absolute;left:50px;right:0;top:0;border-top:.5px solid var(--line)}
+.txr > i{flex:none;width:24px;height:24px;margin-top:10px;color:var(--muted)}
+.txr > i svg{display:block;width:24px;height:24px}
+.txr .b{flex:1;min-width:0}
+.sheet .txr label{display:block;font-size:12.5px;font-weight:500;color:var(--muted);margin:0;text-transform:none}
+.sheet .txr:focus-within label{color:var(--accent)}
+.sheet .txr input[type=text],.sheet .txr input[type=date],.sheet .txr select,.sheet .txr .pick{display:block;width:100%;min-height:30px;font:inherit;font-size:17px;padding:3px 0;border:0;border-radius:0;background:none;color:var(--text);text-align:left;box-shadow:none;-webkit-appearance:none;appearance:none;cursor:pointer}
+.sheet .txr input[type=text]{cursor:text}
+.sheet .txr select,.sheet .txr .pick{padding-right:18px;background:no-repeat right 2px center/8px 13px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 13'%3E%3Cpath d='M1.5 1.5l5 5-5 5' fill='none' stroke='%239a9aa0' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.sheet .txr .pick.ph{color:var(--muted)}
+.txr input::-webkit-date-and-time-value{text-align:left}
+.txr .drow{display:flex;align-items:center;gap:8px}
+.txr .drow input{flex:1;min-width:0}
+.txr .qrow{margin:6px 0 2px}
+.txr .drow .qrow{flex:none;flex-wrap:nowrap;margin:0}
+.sheet .txr .qrow button{background:var(--soft)}
+.sheet .txr .qrow button.on{background:var(--accent);color:#fff}
+#tHint{margin:-4px 4px 12px}
+.txfoot{position:sticky;bottom:env(safe-area-inset-bottom,0px);z-index:2;padding:8px 0;background:var(--card)}
+body.apple .txfoot{background:var(--bg)}
+#tPick .ptop{display:flex;gap:8px;align-items:center}
+#tPick .ptop .btn{flex:none;padding:12px 14px}
+.phd{font-size:13px;font-weight:700;margin:14px 4px 6px}
+.prow{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border:0;border-top:.5px solid var(--line);background:none;color:var(--text);font:inherit;font-size:16px;padding:13px 14px;text-align:left;cursor:pointer}
+.prow:first-child{border-top:0}
+.prow span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.prow.on span::before{content:"✓  ";color:var(--accent);font-weight:700}
+.prow b{flex:none;font-weight:600}
+.prow b.pos{color:var(--pos)} .prow b.neg{color:var(--neg)}
+.row-i.addrow .t{color:var(--accent);font-weight:600}
+.row-i.addrow{min-height:0}
+/* ===================== Дизайн «Новий»: теплий папір, білі картки, індиго-акцент, градієнтна шапка (працює поверх Apple) ===================== */
+body.warm{
+  --bg:#f4f1ea; --card:#fff; --card2:#fffdf8; --text:#1d1b17; --muted:#7c7467; --line:rgba(70,55,30,.13); --soft:rgba(80,65,40,.07);
+  --accent:#4f5bd5; --accent2:#7b5cf0; --accent-soft:rgba(79,91,213,.11);
+  --pos:#2c9a5a; --pos-soft:rgba(44,154,90,.13); --neg:#e0484d; --neg-soft:rgba(224,72,77,.11); --warn:#d98200; --warn-soft:rgba(217,130,0,.13);
+  --segon:#fff; --segtxt:#1d1b17; --tabbar:rgba(255,253,248,.86); --r:20px;
+  --hero:linear-gradient(135deg,#4f5bd5 0%,#7b5cf0 52%,#4fa48f 100%); --hero-shadow:0 14px 30px -14px rgba(79,91,213,.55);
+  --v-grid:#ebe6dc; --v-axis:#d3ccbe;
+}
+@media (prefers-color-scheme: dark){
+  body.warm{ --bg:#14120f; --card:#1f1c18; --card2:#26221d; --text:#f3efe7; --muted:rgba(243,239,231,.56); --line:rgba(255,240,220,.1); --soft:rgba(255,240,220,.07);
+    --accent:#8f97ff; --accent2:#a98bff; --accent-soft:rgba(143,151,255,.16); --pos:#4cc38a; --pos-soft:rgba(76,195,138,.16); --neg:#ff6b6b; --neg-soft:rgba(255,107,107,.16); --warn:#f5a524; --warn-soft:rgba(245,165,36,.16);
+    --segon:#3a352e; --segtxt:#f3efe7; --tabbar:rgba(31,28,24,.86);
+    --hero:linear-gradient(135deg,#3d44a8 0%,#5b40a6 52%,#2c7a68 100%); --hero-shadow:0 14px 30px -16px rgba(0,0,0,.7);
+    --v-grid:#2c2824; --v-axis:#45403a; }
+}
+html:has(body.warm){background:#f4f1ea}
+@media (prefers-color-scheme: dark){ html:has(body.warm){background:#14120f} }
+body.warm .wrap{padding:0 16px calc(118px + env(safe-area-inset-bottom))}
+body.warm .top h1{font-size:32px;font-weight:800;letter-spacing:-.025em}
+body.warm .iconbtn{background:var(--card);border-radius:50%;width:40px;height:40px;box-shadow:0 1px 2px rgba(60,40,10,.08)}
+body.warm .iconbtn svg{width:22px;height:22px}
+/* Шапка-картка з градієнтом */
+body.warm .hero{background:var(--hero);color:#fff;border-radius:26px;padding:16px 18px 18px;box-shadow:var(--hero-shadow);position:relative;overflow:hidden}
+body.warm .hero::after{content:"";position:absolute;right:-60px;top:-70px;width:220px;height:220px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.22),transparent);pointer-events:none}
+body.warm .hero .lbl,body.warm .hero .sub{color:rgba(255,255,255,.82)}
+body.warm .hero .amount,body.warm .hero .amount.neg{color:#fff}
+body.warm .hero .amount.neg::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:#ffb4b4;margin:0 10px 6px 0;vertical-align:middle}
+body.warm .hero .amount .c{opacity:.75}
+body.warm .hero .mpill{background:rgba(255,255,255,.14);border-radius:999px;margin:0;padding:2px 4px}
+body.warm .hero .mpill button{color:#fff}
+body.warm .hero .badge,body.warm .hero .badge.pos,body.warm .hero .badge.neg{background:rgba(255,255,255,.18);color:#fff;border-radius:999px;padding:5px 11px;font-weight:600}
+body.warm .hero .badge.neg{background:rgba(255,120,120,.32)}
+/* Кнопки дій */
+body.warm .actions{gap:10px;margin:14px 0 4px}
+body.warm .act{border-radius:18px;padding:12px 4px 10px;box-shadow:0 1px 2px rgba(60,40,10,.06);font-weight:600}
+body.warm .act i{width:38px;height:38px;border-radius:50%;background:var(--accent-soft);display:flex;align-items:center;justify-content:center}
+body.warm .act i svg{width:21px;height:21px}
+body.warm .act.on i{background:rgba(255,255,255,.2)}
+/* Списки */
+body.warm .sec-h{margin:24px 6px 9px}
+body.warm .sec-h .n{text-transform:none;font-size:17px;font-weight:700;color:var(--text);letter-spacing:-.01em}
+body.warm .sec-h .s{font-size:14px;color:var(--muted)}
+body.warm .list,body.warm .card,body.warm .kpi{border-radius:var(--r);box-shadow:0 1px 2px rgba(60,40,10,.05)}
+body.warm .row-i{padding:11px 16px;min-height:58px}
+body.warm .row-i + .row-i::before{left:66px}
+body.warm .av{width:36px;height:36px;border-radius:12px;font-size:19px;background:color-mix(in srgb,var(--c) 20%,transparent)!important;color:var(--c)!important}
+body.warm .row-i .t{font-weight:500}
+body.warm .row-i .r .v{font-weight:600}
+body.warm .day{text-transform:none;font-size:15px;font-weight:700;color:var(--text);margin:22px 6px 8px}
+body.warm .tip,body.warm .warnbox{border-radius:var(--r)}
+/* Кнопки, поля */
+body.warm .btn{border-radius:999px;padding:14px 18px;box-shadow:0 8px 18px -10px rgba(79,91,213,.7)}
+body.warm .btn.sec,body.warm .btn.danger{box-shadow:0 1px 2px rgba(60,40,10,.06)}
+body.warm .btn.small{border-radius:999px}
+body.warm .chip,body.warm .chips button,body.warm .qrow button{border-radius:999px}
+body.warm .seg{border-radius:999px;padding:3px}
+body.warm .seg button{border-radius:999px}
+body.warm .f label{text-transform:none;font-weight:600;font-size:13px}
+body.warm input[type=text],body.warm input[type=date],body.warm input[type=number],body.warm input[type=month],body.warm select{border-radius:14px}
+body.warm .search{border-radius:999px;background:var(--card);padding:0 14px}
+/* Вікна */
+body.warm .sheet{border-radius:28px 28px 0 0;padding:8px 16px calc(22px + env(safe-area-inset-bottom))}
+body.warm .sheet .hd b{font-size:18px;font-weight:700}
+body.warm .sheet .hd .mini{background:var(--card);border-radius:50%;width:34px;height:34px}
+body.warm .txtop{background:var(--card);border-radius:26px;padding:12px 12px 14px;margin:0 0 14px}
+body.warm .txtop input.amtin{font-size:46px;font-weight:800;letter-spacing:-.03em}
+/* Плаваюча нижня панель */
+body.warm .nav{left:12px;right:12px;width:auto;bottom:calc(10px + env(safe-area-inset-bottom));border-radius:30px;border:1px solid var(--line);box-shadow:0 12px 30px -12px rgba(40,30,10,.35);padding-bottom:0;backdrop-filter:blur(22px) saturate(1.6);-webkit-backdrop-filter:blur(22px) saturate(1.6)}
+body.warm .nav .in{padding:5px 6px}
+body.warm .nav button{border-radius:24px;padding:6px 0 6px;font-size:10.5px}
+body.warm .nav button.on{background:var(--accent-soft);color:var(--accent);font-weight:700}
+body.warm .nav .add span{width:48px;height:48px;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 8px 18px -6px rgba(79,91,213,.7)}
+body.warm .toast{border-radius:999px}
+body.warm .btn:not(.sec):not(.danger),body.warm .act.on,body.warm .nav .add span,body.warm .txr .qrow button.on{background:linear-gradient(135deg,#4f5bd5,#7b5cf0);color:#fff}
+body.warm .act.on i{color:#fff}
 </style>
 </head>
 <body>
@@ -403,10 +518,10 @@ body:not(.apple) .sheet .card.vzc{background:none;padding:0;margin-bottom:14px}
   <main id="view"><div class="center">Завантаження…</div></main>
 </div>
 <nav class="nav" id="nav" hidden><div class="in">
-  <button data-tab="budget" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Бюджет</button>
+  <button data-tab="acc" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M2.5 10h19M6.5 15h4"/></svg>Рахунки</button>
   <button data-tab="tx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M7 7h13M7 12h13M7 17h13"/><circle cx="3.5" cy="7" r=".6" fill="currentColor"/><circle cx="3.5" cy="12" r=".6" fill="currentColor"/><circle cx="3.5" cy="17" r=".6" fill="currentColor"/></svg>Транзакції</button>
   <button class="add" id="navAdd" aria-label="Нова транзакція"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
-  <button data-tab="acc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M2.5 10h19M6.5 15h4"/></svg>Рахунки</button>
+  <button data-tab="budget"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3.5 8.5l8.5 6 8.5-6"/></svg>Бюджет</button>
   <button data-tab="rep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M5 20V11M12 20V4M19 20v-6"/></svg>Звіти</button>
 </div></nav>
 <div class="toast" id="toast"></div>
@@ -465,7 +580,7 @@ const shortDate = d => +d.slice(8,10) + " " + MSHORT[+d.slice(5,7)-1] + (d.slice
 /* =====================================================================
    Zustand
    ===================================================================== */
-const S = { meta:null, tx:{}, tab:"budget", month:curMonth(), edit:false, collapsed:{}, accFilter:"", catFilter:"", search:"", txLimit:150 };
+const S = { meta:null, tx:{}, tab:"acc", month:curMonth(), edit:false, collapsed:{}, accFilter:"", catFilter:"", search:"", txLimit:150 };
 const ACC_TYPES = { checking:"Поточний", savings:"Ощадний", cash:"Готівка", credit:"Кредитна картка", debt:"Борг / розстрочка (Klarna, кредит)" };
 const TEMPLATES = {
   std: [
@@ -569,7 +684,7 @@ function compute(view){
   // Schuldenkonten (Klarna, Kredit, Kreditkarte): Konto -> Tilgungskategorie
   const payOf = {};
   S.meta.accounts.forEach(a => { if (a.payCat && cats.includes(a.payCat)) payOf[a.id] = a.payCat; });
-  const inc = {}, act = {}, real = {}, owed = {}, paid = {};
+  const inc = {}, act = {}, real = {}, owed = {}, paid = {}, paidNow = {}, nowM = curMonth();
   const addAct = (m, c, v) => { const o = act[m] = act[m] || {}; o[c] = (o[c] || 0) + v; };
   let minM = view;
   for (const t of allTx()){
@@ -578,6 +693,7 @@ function compute(view){
     const pa = payOf[t.acc], pt = t.to ? payOf[t.to] : null;
     if (m <= view){ if (pa) owed[t.acc] = (owed[t.acc] || 0) - t.amt; if (pt) owed[t.to] = (owed[t.to] || 0) + t.amt; }
     if (pt && m === view) paid[t.to] = (paid[t.to] || 0) - t.amt;
+    if (pt && m === nowM) paidNow[t.to] = (paidNow[t.to] || 0) - t.amt;
     if (t.to){                                   // Überweisung: Zahlung an ein Schuldenkonto kommt aus dessen Tilgungskategorie
       if (pa) addAct(m, pa, -t.amt);
       if (pt) addAct(m, pt, t.amt);
@@ -612,6 +728,24 @@ function compute(view){
     const p = per[c.id], tg = c.target; p.need = 0; p.under = 0; p.prog = null;
     if (c.pay){
       const o = Math.max(0, owed[c.pay] || 0); p.debt = o; p.paid = paid[c.pay] || 0;
+      if (view > nowM && o > 0){                 // Zukunft: Restschuld laut Plan statt heutiger Schuld
+        const sd = debtSched(c.pay), K = { weekly:52/12, biweekly:26/12, monthly:1, quarterly:1/3, yearly:1/12 };
+        const plan = sd ? Math.max(1, Math.round(-sd.amt * (K[sd.freq] || 1))) : tg && tg.type === "monthly" && tg.amt ? tg.amt : tg && tg.type === "date" && tg.month ? Math.ceil(o / Math.max(1, monthDiff(nowM, tg.month) + 1)) : 0;
+        if (plan){
+          let left = o;
+          for (let k = nowM; k < view && left > 0; k = addMonth(k, 1)){
+            const pay = sd ? (k >= sd.next.slice(0, 7) ? plan : 0) : k === nowM ? Math.max(0, plan - (paidNow[c.pay] || 0)) : plan;
+            left -= Math.min(left, pay);
+            if (left <= Math.max(5, Math.round(plan * .02))) left = 0;
+          }
+          p.debt = left; p.projected = true;
+          if (left <= 0){ p.planDone = true; continue; }
+          p.need = tg && tg.type === "date" && tg.month ? Math.ceil(left / Math.max(1, monthDiff(view, tg.month) + 1)) : Math.min(plan, left);
+          p.under = Math.max(0, p.need - p.assigned);
+          p.prog = clamp01(p.assigned / p.need);
+          continue;
+        }
+      }
       const uncovered = Math.max(0, o - (p.available - p.assigned));
       if (tg && tg.type === "monthly" && tg.amt) p.need = Math.min(tg.amt, uncovered);
       else if (tg && tg.type === "date") p.need = Math.ceil(uncovered / Math.max(1, monthDiff(view, tg.month || view) + 1));
@@ -647,7 +781,7 @@ function accBalance(id){
 /* =====================================================================
    Speicher: Claude-db (privat pro Nutzer) mit Fallback localStorage
    ===================================================================== */
-const LS_KEY = "budget-app-v1", APP_VER = "2026-11-13.3";
+const LS_KEY = "budget-app-v1", APP_VER = "2026-11-14.1";
 const store = { kind:null, metaRef:null, txCol:null };
 const dirty = new Set(); let saveTimer = null, saving = false, fatal = false;
 /* ---------- Rückgängig / Wiederholen ----------
@@ -868,7 +1002,8 @@ function topBar(title, neoHide){
     '<button class="iconbtn" id="undoBtn" data-act="history" aria-label="Останні дії"' + (hasUndo ? "" : " hidden") + '>' + IC.undo + '</button>' +
     '<button class="iconbtn" data-act="settings" aria-label="Налаштування">' + IC.gear + '</button>';
 }
-function applyTheme(){ document.body.classList.toggle("apple", !(S.meta && S.meta.theme === "neo")); }
+const lookOf = () => (S.meta && S.meta.look) || "warm";      // «warm» = новий дизайн (типово), «apple», «neo»
+function applyTheme(){ const l = lookOf(); document.body.classList.toggle("apple", l !== "neo"); document.body.classList.toggle("warm", l === "warm"); }
 const monthPill = () => '<div class="mpill"><button data-act="mPrev" aria-label="попередній місяць">‹</button><span>' + monthLabel(S.month) + '</span><button data-act="mNext" aria-label="наступний місяць">›</button></div>';
 const actBtn = (act, icon, label, on, dis) => '<button class="act' + (on ? " on" : "") + '" data-act="' + act + '"' + (dis ? " disabled" : "") + '><i>' + icon + '</i>' + label + '</button>';
 
@@ -910,6 +1045,8 @@ function renderSetup(){
 /* ---------- Budget ---------- */
 const dueLabel = m => MSHORT[+m.slice(5,7)-1] + " " + m.slice(0,4);
 function targetHint(c, p){
+  if (c.pay && p.planDone) return "За планом уже погашено ✓";
+  if (c.pay && p.projected) return "Залишок за планом " + eur(p.debt) + (p.under > 0 ? " · зарезервувати ще " + eur(p.under) : " ✓");
   if (c.pay) return p.debt ? "Борг " + eur(p.debt) + (p.under > 0 ? " · зарезервувати ще " + eur(p.under) : p.paid ? " · сплачено " + eur(p.paid) : "") : "Боргу немає ✓";
   const tg = c.target; if (!tg || !tg.amt) return "";
   const pct = " · " + Math.round((p.prog || 0) * 100) + "%";
@@ -932,7 +1069,7 @@ function renderBudget(){
   const C = compute(S.month), r = C.rta;
   let underTotal = 0; allCats().forEach(c => { if (!c.hidden) underTotal += C.per[c.id].under; });
   let h = '<div class="hero">' + monthPill() + '<div class="lbl">Готово до розподілу</div>' + bigAmount(r, r < 0 ? "neg" : "") +
-    '<div class="sub">Дохід за місяць: <span class="num">' + eur(C.income) + '</span>' + (underTotal > 0 ? '<br>До цілей бракує: <span class="num">' + eur(underTotal) + '</span>' : "") + '</div>' +
+    '<div class="sub">Дохід за місяць: <span class="num">' + eur(C.income) + '</span>' + (underTotal > 0 ? '<br>До цілей бракує: <span class="num">' + eur(underTotal) + '</span>' : "") + (S.month > curMonth() && S.meta.accounts.some(a => a.payCat && !a.closed) ? '<br><span style="font-size:12.5px">Майбутній місяць: борги пораховано за планом погашення</span>' : "") + '</div>' +
     '<span class="badge ' + (r > 0 ? "" : r < 0 ? "neg" : "pos") + '">' + (r > 0 ? "Дайте завдання кожному євро" : r < 0 ? "Розподілено більше, ніж є" : "Кожен євро має завдання ✓") + '</span></div>';
   h += '<div class="actions">' + actBtn("fill", IC.spark, "Заповнити") + actBtn("moveAny", IC.swap, "Перемістити") +
        actBtn("sched", IC.repeat, "Регулярні") + actBtn("toggleEdit", S.edit ? IC.check : IC.edit, S.edit ? "Готово" : "Змінити", S.edit) + '</div>';
@@ -951,7 +1088,7 @@ function renderBudget(){
       const sub = hint || (p.activity < 0 ? "Витрачено " + eur(-p.activity) : p.activity > 0 ? "Повернення " + eur(p.activity) : "");
       h += '<div class="row-i' + (c.hidden ? " hidden-cat" : "") + '" data-act="' + (S.edit ? "editCat" : "openCat") + '" data-id="' + c.id + '">' +
         avatar(catIcon(c), hue(c.id), ringFor(p.prog, p.under > 0)) +
-        '<div class="m"><div class="t">' + esc(c.name) + (c.hidden ? " · приховано" : "") + '</div>' + (sub ? '<div class="st w">' + esc(sub) + '</div>' : "") + (S.edit ? "" : rowBar(c, p)) + '</div>' +
+        '<div class="m"><div class="t">' + esc(c.pay && !S.edit ? c.name.replace(/^Погашення:\s*/, "") : c.name) + (c.hidden ? " · приховано" : "") + '</div>' + (sub ? '<div class="st w">' + esc(sub) + '</div>' : "") + (S.edit ? "" : rowBar(c, p)) + '</div>' +
         (S.edit
           ? '<div class="ed"><button class="mini" data-act="catUp" data-id="' + c.id + '"' + (ci === 0 && gi === 0 ? " disabled" : "") + '>↑</button><button class="mini" data-act="catDown" data-id="' + c.id + '">↓</button></div>'
           : '<div class="r"><div class="v num ' + cls + '">' + eur(av) + '</div>' + (c.pay ? '<div class="st">резерв</div>' : p.assigned ? '<div class="st num">виділено ' + eur(p.assigned) + '</div>' : "") + '</div>') + '</div>';
@@ -1036,11 +1173,21 @@ function renderAcc(){
   h += '<div class="actions">' + actBtn("addAcc", IC.plus, "Рахунок") + actBtn("addDebt", IC.debt, "Борг") + actBtn("xferTx", IC.swap, "Переказ") + actBtn("txAll", IC.card, "Операції") + '</div>';
   const row = (a, dim) => {
     const b = bal[a.id], d = isD(a);
-    return '<div class="row-i' + (dim ? " hidden-cat" : "") + '" data-act="openAcc" data-id="' + a.id + '">' + avatar(ACC_ICON[a.type] || "🏦", dim ? "#8b92a1" : hue(a.id)) + '<div class="m"><div class="t">' + esc(a.name) + '</div><div class="st">' +
-      (d ? "Резерв у бюджеті: " + eur(Math.max(0, P[a.payCat].available)) : (ACC_TYPES[a.type] || "").split(" (")[0]) + '</div></div><div class="r"><div class="v num ' + (b < 0 ? "neg" : "") + '">' + eur(b) + '</div></div></div>';
+    return '<div class="row-i' + (dim ? " hidden-cat" : "") + '" data-act="openAcc" data-id="' + a.id + '">' + avatar(ACC_ICON[a.type] || "🏦", dim ? "#8b92a1" : hue(a.id)) + '<div class="m"><div class="t">' + esc(a.name) + '</div><div class="st' + (d ? " w" : "") + '">' +
+      (d ? "Резерв " + eur(Math.max(0, P[a.payCat].available)) + (endOf[a.id] ? " · закриється " + MONTHS[+endOf[a.id].slice(5, 7) - 1] + " " + endOf[a.id].slice(0, 4) : "") : (ACC_TYPES[a.type] || "").split(" (")[0]) + '</div></div><div class="r"><div class="v num ' + (b < 0 ? "neg" : "") + '">' + eur(b) + '</div></div></div>';
   };
   const cash = accs.filter(a => !a.closed && !isD(a)), dl = accs.filter(a => !a.closed && isD(a)), closed = accs.filter(a => a.closed);
+  const F = dl.length ? debtForecast() : null, endOf = {}; if (F) F.debts.forEach(d => { if (d.owed > 0 && d.end) endOf[d.a.id] = d.end; });
+  const goals = allCats().filter(c => !c.hidden && !c.pay && c.target && c.target.amt && (c.target.type === "date" || c.target.type === "balance"));
+  let saved = 0; goals.forEach(c => { saved += Math.max(0, P[c.id].available); });
+  const goalRow = c => { const p = P[c.id], tg = c.target, pct = Math.round(clamp01(Math.max(0, p.available) / tg.amt) * 100);
+    return '<div class="row-i" data-act="openCat" data-id="' + c.id + '">' + avatar(catIcon(c), hue(c.id), ringFor(p.prog, p.under > 0)) + '<div class="m"><div class="t">' + esc(c.name) + '</div><div class="st w">' +
+      (pct >= 100 ? "Ціль досягнуто ✓" : "Ціль " + eur(tg.amt) + (tg.type === "date" ? " до " + dueLabel(p.due || tg.month) : "") + (p.need > 0 ? " · " + eur(p.need) + "/міс" : "")) + '</div>' + rowBar(c, p) + '</div>' +
+      '<div class="r"><div class="v num ' + (p.available < 0 ? "neg" : "") + '">' + eur(p.available) + '</div><div class="st num">' + pct + ' %</div></div></div>'; };
   h += '<div class="sec-h"><span class="n">Гроші</span><span class="s num">' + eur(money) + '</span></div><div class="list">' + (cash.length ? cash.map(a => row(a)).join("") : '<div class="empty">Рахунків ще немає</div>') + '</div>';
+  h += '<div class="sec-h"><span class="n">Заощадження</span>' + (goals.length ? '<span class="s num">' + eur(saved) + '</span>' : "") + '</div><div class="list">' +
+    goals.map(goalRow).join("") + (goals.length ? "" : '<div class="empty">Відпустка, телефон, подушка безпеки: створіть ціль, і тут буде видно, скільки вже відкладено.</div>') +
+    '<div class="row-i addrow" data-act="newGoal"><div class="m"><div class="t">＋ Нова ціль</div></div></div></div>';
   h += '<div class="sec-h"><span class="n">Борги</span>' + (dl.length ? '<span class="s num">' + eur(debts) + '</span>' : "") + '</div><div class="list">' +
     (dl.length ? dl.map(a => row(a)).join("") : '<div class="empty">Klarna, розстрочку чи кредит додайте кнопкою «Борг»: програма допоможе планувати погашення.</div>') + '</div>';
   if (closed.length) h += '<div class="sec-h"><span class="n muted">Закриті</span></div><div class="list">' + closed.map(a => row(a, true)).join("") + '</div>';
@@ -1417,7 +1564,7 @@ function renderRep(){
     h += '<div class="mt-row" data-act="openCat" data-id="' + c.id + '"><div class="mt-h"><span class="n">' + N(catIcon(c) + " " + c.name) + '</span><span class="v num">' + right + '</span></div><div class="mt"><i style="width:' + Math.round((p.prog || 0) * 100) + '%"></i></div>' +
       (p.under > 0 ? '<div class="mt-s warn">Цього місяця ще відкласти ' + eur(p.under) + '</div>' : "") + '</div>';
   });
-  if (goals.length) h += '<div class="vz-sub" style="margin:8px 0 12px">На всі цілі цього місяця потрібно: <b class="num" style="color:var(--text)">' + eur(needSum) + '</b></div>';
+  if (goals.length && needSum > 0) h += '<div class="vz-sub" style="margin:8px 0 12px">На всі цілі цього місяця потрібно: <b class="num" style="color:var(--text)">' + eur(needSum) + '</b></div>';
   h += '<button class="btn sec wide" style="margin-top:' + (goals.length ? 0 : 10) + 'px" data-act="newGoal">＋ Нова ціль</button></div>';
   $("view").innerHTML = h;
   bindRep($("view"), names);
@@ -1557,23 +1704,31 @@ function txSheet(id, preset, schedId){
   }
   const payeeTop = out => Object.keys(pc).filter(p => (pc[p].out >= 0) === out).sort((a, b) => pc[b].n - pc[a].n).slice(0, 6);
   const topCats = allCats().filter(c => !c.hidden && !c.pay).sort((a, b) => (cc[b.id] || 0) - (cc[a.id] || 0)).slice(0, 8);
-  const payees = [...new Set(allTx().map(x => x.payee).filter(Boolean))].slice(-200);
+  const payees = [...new Set(allTx().filter(x => !x.sys).map(x => x.payee).filter(Boolean))].slice(-300);
   const today = todayStr(), yest = addDays(today, -1);
+  const svgI = d => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="' + d + '"/></svg>';
+  const TXI = { payee: svgI("M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4.5 20a7.5 7.5 0 0 1 15 0"), cat: svgI("M4 4h7l9 9-7 7-9-9zM8 8h.01"), acc: svgI("M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 16.5zM3 10h18"),
+    date: svgI("M4 6h16v14H4zM4 10h16M8 3v4M16 3v4"), memo: svgI("M4 5h16v14H4zM8 10h8M8 14h5"), rep: svgI("M4 9h13l-3-3M20 15H7l3 3") };
   openSheet(sc ? "Регулярний платіж" : t ? "Редагувати транзакцію" : payMode ? "Платіж за боргом" : "Нова транзакція", `
-    <div class="seg" id="tKind"><button data-v="out">Витрата</button><button data-v="in">Дохід</button><button data-v="xfer">Переказ</button></div>
-    <div class="f"><input class="amtin num" id="tAmt" type="text" inputmode="decimal" placeholder="0,00 €" value="${amtStr(Math.abs(v.amt))}"></div>
-    <div id="fPayee"><div class="qrow" id="tPayees"></div>
-      <div class="f"><label>Одержувач / платник</label><input type="text" id="tPayee" list="payeeList" value="${esc(v.payee)}" maxlength="60" autocomplete="off">
-      <datalist id="payeeList">${payees.map(p => '<option value="' + esc(p) + '">').join("")}</datalist></div></div>
-    <div class="f" id="fCat"><label>Категорія</label><div class="qrow" id="tCats"></div><select id="tCat"></select><div class="info" id="tInfo"></div></div>
-    <div class="row"><div class="f"><label id="lAcc">Рахунок</label><select id="tAcc">${accOptions(v.acc, payMode ? (a => !isDebt(a)) : null)}</select></div>
-      <div class="f" id="fTo"><label>На рахунок</label><select id="tTo">${accOptions(v.to || "")}</select></div></div>
+    <div class="txtop"><input class="amtin num" id="tAmt" type="text" inputmode="decimal" placeholder="0,00 €" value="${amtStr(Math.abs(v.amt))}" aria-label="Сума">
+      <div class="seg" id="tKind"><button data-v="out">Витрата</button><button data-v="in">Дохід</button><button data-v="xfer">Переказ</button></div></div>
+    <div id="tForm">
+    <div class="list txl">
+      <div class="txr" id="fPayee"><i>${TXI.payee}</i><div class="b"><label for="tPayee">Одержувач / платник</label><input type="text" id="tPayee" value="${esc(v.payee)}" maxlength="60" autocomplete="off" autocorrect="off" placeholder="Напр.: REWE"><div class="qrow" id="tPayees"></div></div></div>
+      <div class="txr" id="fCat"><i>${TXI.cat}</i><div class="b"><label>Категорія</label><button type="button" class="pick" id="tCatBtn"></button><select id="tCat" hidden></select><div class="qrow" id="tCats"></div><div class="info" id="tInfo"></div></div></div>
+      <div class="txr"><i>${TXI.acc}</i><div class="b"><label id="lAcc" for="tAcc">Рахунок</label><select id="tAcc">${accOptions(v.acc, payMode ? (a => !isDebt(a)) : null)}</select></div></div>
+      <div class="txr" id="fTo"><i>${TXI.acc}</i><div class="b"><label for="tTo">На рахунок</label><select id="tTo">${accOptions(v.to || "")}</select></div></div>
+      <div class="txr"><i>${TXI.date}</i><div class="b"><label for="tDate">${sc ? "Наступна дата" : "Дата"}</label><div class="drow"><input type="date" id="tDate" value="${v.date}">${sc ? "" : '<div class="qrow"><button data-d="' + today + '">Сьогодні</button><button data-d="' + yest + '">Вчора</button></div>'}</div></div></div>
+    </div>
     <div class="info" id="tHint"></div>
-    <div class="f"><label>${sc ? "Наступна дата" : "Дата"}</label><div class="row" style="align-items:center"><input type="date" id="tDate" value="${v.date}">${sc ? "" : '<div class="qrow" style="flex:none;margin:0;flex-wrap:nowrap"><button data-d="' + today + '">Сьогодні</button><button data-d="' + yest + '">Вчора</button></div>'}</div></div>
-    <div class="row"><div class="f"><label>Нотатка</label><input type="text" id="tMemo" value="${esc(v.memo)}" maxlength="80"></div>
-      ${t ? "" : '<div class="f"><label>Повторювати</label><select id="tRep">' + (sc ? "" : '<option value="">Ні</option>') + Object.entries(FREQ).map(([k, l]) => '<option value="' + k + '"' + (sc && sc.freq === k ? " selected" : "") + '>' + l + '</option>').join("") + '</select></div>'}</div>
-    <button class="btn wide" id="tSave">Зберегти</button>
-    ${isNew ? '<button class="btn sec wide" style="margin-top:8px" id="tAgain">Зберегти і додати ще</button>' : '<button class="btn danger wide" style="margin-top:8px" id="tDel">Видалити</button>'}`, el => {
+    <div class="list txl">
+      <div class="txr"><i>${TXI.memo}</i><div class="b"><label for="tMemo">Коментар</label><input type="text" id="tMemo" value="${esc(v.memo)}" maxlength="120" placeholder="Необов’язково"></div></div>
+      ${t ? "" : '<div class="txr"><i>' + TXI.rep + '</i><div class="b"><label for="tRep">Повторювати</label><select id="tRep">' + (sc ? "" : '<option value="">Ні</option>') + Object.entries(FREQ).map(([k, l]) => '<option value="' + k + '"' + (sc && sc.freq === k ? " selected" : "") + '>' + l + '</option>').join("") + '</select></div></div>'}
+    </div>
+    <div class="txfoot"><button class="btn wide" id="tSave">Зберегти</button></div>
+    ${isNew ? '<button class="btn sec wide" id="tAgain">Зберегти і додати ще</button>' : '<button class="btn danger wide" id="tDel">Видалити</button>'}
+    </div>
+    <div id="tPick" hidden><div class="ptop"><button type="button" class="btn sec" id="tPickX">‹ Назад</button><input type="text" id="tPickQ" placeholder="Пошук категорії" autocomplete="off"></div><div id="tPickL"></div></div>`, el => {
     const catSel = q(el,"#tCat"), accSel = q(el,"#tAcc"), toSel = q(el,"#tTo"), repSel = q(el,"#tRep");
     const info = () => {
       const box = q(el,"#tInfo"), hint = q(el,"#tHint"); box.textContent = ""; box.className = "info"; hint.textContent = "";
@@ -1600,15 +1755,42 @@ function txSheet(id, preset, schedId){
       }
       q(el,"#tSave").textContent = !t && repSel && repSel.value && date > today ? "Запланувати" : payMode ? "Записати платіж" : "Зберегти";
     };
-    const paintCats = () => { el.querySelectorAll("#tCats button").forEach(b => b.classList.toggle("on", b.dataset.c === catSel.value)); info(); };
+    const paintCats = () => {
+      el.querySelectorAll("#tCats button").forEach(b => b.classList.toggle("on", b.dataset.c === catSel.value));
+      const c = catById(catSel.value), o = catSel.selectedOptions[0], btn = q(el,"#tCatBtn");
+      btn.textContent = catSel.value ? (c ? catIcon(c) + " " + c.name : o ? o.textContent : "") : "Виберіть категорію"; btn.classList.toggle("ph", !catSel.value);
+      info();
+    };
+    // Vorschläge: ohne Eingabe die häufigsten, beim Tippen alle früheren Namen, die passen (Wortanfang zuerst)
+    const paintPayees = () => {
+      const f = q(el,"#tPayee").value.trim().toLowerCase();
+      const list = kind === "xfer" ? [] : !f ? payeeTop(kind === "out")
+        : payees.filter(p => { const l = p.toLowerCase(); return l !== f && l.includes(f); }).sort((a, b) => (b.toLowerCase().startsWith(f) - a.toLowerCase().startsWith(f)) || ((pc[b] || { n:0 }).n - (pc[a] || { n:0 }).n)).slice(0, 6);
+      q(el,"#tPayees").innerHTML = list.map(p => '<button data-p="' + esc(p) + '">' + esc(p) + '</button>').join("");
+    };
+    // Kategorie-Auswahl: Liste nach Gruppen mit dem verfügbaren Betrag, aufgebaut aus denselben Optionen wie das Auswahlfeld
+    const paintPick = () => {
+      const f = q(el,"#tPickQ").value.trim().toLowerCase(), per = compute((q(el,"#tDate").value || today).slice(0, 7)).per;
+      const row = (val, txt) => { const c = catById(val), p = c && !c.pay ? per[c.id] : null;
+        return '<button type="button" class="prow' + (val === catSel.value ? " on" : "") + '" data-c="' + esc(val) + '"><span>' + esc(c ? catIcon(c) + " " + c.name : txt) + '</span>' + (p ? '<b class="num' + (p.available < 0 ? " neg" : p.available > 0 ? " pos" : "") + '">' + eur(p.available) + '</b>' : "") + '</button>'; };
+      const hit = o => o.value && (!f || o.textContent.toLowerCase().includes(f));
+      const often = !f && kind === "out" ? topCats.filter(c => cc[c.id]).slice(0, 4) : [];
+      let h = often.length ? '<div class="phd">Часто</div><div class="list">' + often.map(c => row(c.id, c.name)).join("") + '</div>' : "";
+      [...catSel.children].forEach(n => {
+        if (n.tagName === "OPTGROUP"){ const r = [...n.children].filter(hit).map(o => row(o.value, o.textContent)).join(""); if (r) h += '<div class="phd">' + esc(n.label) + '</div><div class="list">' + r + '</div>'; }
+        else if (hit(n)) h += '<div class="list" style="margin-top:8px">' + row(n.value, n.textContent) + '</div>';
+      });
+      q(el,"#tPickL").innerHTML = h || '<div class="info">Нічого не знайдено</div>';
+    };
+    const showPick = on => { q(el,"#tPick").hidden = !on; q(el,"#tForm").hidden = on; q(el,".txtop").hidden = on; if (on){ q(el,"#tPickQ").value = ""; paintPick(); } el.scrollTop = 0; };
     const setKind = k => {
       kind = k; [...q(el,"#tKind").children].forEach(b => b.classList.toggle("on", b.dataset.v === k));
       q(el,"#fPayee").hidden = k === "xfer"; q(el,"#fCat").hidden = k === "xfer"; q(el,"#fTo").hidden = k !== "xfer" || payMode;
       q(el,"#lAcc").textContent = k === "xfer" ? "З рахунку" : "Рахунок";
       const cur = catSel.value || v.cat;
       catSel.innerHTML = catOptions(k === "in" ? (cur || "rta") : (cur === "rta" ? "" : cur), k === "in");
-      q(el,"#tCats").innerHTML = k === "out" ? topCats.map(c => '<button data-c="' + c.id + '">' + catIcon(c) + " " + esc(c.name) + '</button>').join("") : "";
-      q(el,"#tPayees").innerHTML = k === "xfer" ? "" : payeeTop(k === "out").map(p => '<button data-p="' + esc(p) + '">' + esc(p) + '</button>').join("");
+      q(el,"#tCats").innerHTML = k === "out" ? topCats.slice(0, 5).map(c => '<button data-c="' + c.id + '">' + catIcon(c) + " " + esc(c.name) + '</button>').join("") : "";
+      paintPayees();
       if (k === "xfer" && toSel.value === accSel.value){ const o = [...toSel.options].find(o => o.value !== accSel.value); if (o) toSel.value = o.value; }
       paintCats();
     };
@@ -1618,8 +1800,10 @@ function txSheet(id, preset, schedId){
     segBind(q(el,"#tKind"), setKind); setKind(kind);
     if (isNew && preset && preset.cat){ catSel.value = preset.cat; paintCats(); }
     q(el,"#tCats").onclick = e => { const b = e.target.closest("button"); if (!b) return; catSel.value = b.dataset.c; paintCats(); };
-    q(el,"#tPayees").onclick = e => { const b = e.target.closest("button"); if (!b) return; q(el,"#tPayee").value = b.dataset.p; applyPayee(); };
-    q(el,"#tPayee").addEventListener("change", applyPayee);
+    q(el,"#tPayees").onclick = e => { const b = e.target.closest("button"); if (!b) return; q(el,"#tPayee").value = b.dataset.p; applyPayee(); paintPayees(); };
+    q(el,"#tPayee").addEventListener("change", applyPayee); q(el,"#tPayee").addEventListener("input", paintPayees);
+    q(el,"#tCatBtn").onclick = () => showPick(true); q(el,"#tPickX").onclick = () => showPick(false); q(el,"#tPickQ").addEventListener("input", paintPick);
+    q(el,"#tPickL").onclick = e => { const b = e.target.closest("[data-c]"); if (!b) return; catSel.value = b.dataset.c; showPick(false); paintCats(); };
     catSel.onchange = paintCats; accSel.onchange = info; toSel.onchange = info; if (repSel) repSel.onchange = info;
     q(el,"#tAmt").addEventListener("input", info); q(el,"#tDate").addEventListener("change", info);
     el.querySelectorAll("[data-d]").forEach(b => b.onclick = () => { q(el,"#tDate").value = b.dataset.d; info(); });
@@ -1974,7 +2158,7 @@ const dayMon = d => d.slice(8, 10) + "." + d.slice(5, 7) + ".";
 function settingsSheet(){
   const local = store.kind === "local", baks = local ? readBackups() : [], inf = local ? localInfo() : {};
   openSheet("Налаштування", `
-    <div class="f"><label>Дизайн</label><div class="seg" id="sTheme"><button data-v="apple"${S.meta.theme === "neo" ? "" : ' class="on"'}>Apple</button><button data-v="neo"${S.meta.theme === "neo" ? ' class="on"' : ""}>Темний необанк</button></div></div>
+    <div class="f"><label>Дизайн</label><div class="seg" id="sTheme">${[["warm","Новий"],["apple","Apple"],["neo","Темний"]].map(([k, l]) => '<button data-v="' + k + '"' + (lookOf() === k ? ' class="on"' : "") + '>' + l + '</button>').join("")}</div></div>
     <div class="help card" style="background:var(--soft);border:0">
       <p><b>Готово до розподілу</b>: гроші, які ще не отримали завдання. Мета — 0 €.</p>
       <p><b>Розподілено</b>: скільки цього місяця виділено на категорію. <b>Доступно</b>: скільки ще можна витратити (залишки переходять на наступний місяць).</p>
@@ -1992,7 +2176,7 @@ function settingsSheet(){
     <div class="sep"></div>
     <button class="btn danger wide" id="sReset">Видалити всі дані</button>
     <p class="muted" style="font-size:12px;margin-top:10px">${local ? "Дані зберігаються лише в цьому браузері на цьому пристрої. Іконка на початковому екрані та Safari мають окремі дані: перенести їх можна резервною копією." : "Дані зберігаються у вашому приватному сховищі й синхронізуються між пристроями. Інші люди їх не бачать."} Версія ${APP_VER}.</p>`, el => {
-    segBind(q(el,"#sTheme"), tv => { if (tv === "neo") S.meta.theme = "neo"; else delete S.meta.theme; markDirty("meta"); note("Змінено дизайн"); refresh(); });
+    segBind(q(el,"#sTheme"), tv => { S.meta.look = tv; delete S.meta.theme; markDirty("meta"); note("Змінено дизайн"); applyTheme(); refresh(); });
     q(el,"#sExp").onclick = exportBackup;
     q(el,"#sCsv").onclick = () => {
       const rows = [["Дата","Рахунок","Одержувач","Категорія","Нотатка","Сума"]];
